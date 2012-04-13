@@ -41,7 +41,7 @@ class Placeholder(models.Model):
         """
         if request.user.is_superuser:
             return True
-        found = False
+        found = request.user.has_perm('cms.%s_placeholder' % key)
         # check all attached models for change permissions
         for model in self._get_attached_models():
             opts = model._meta
